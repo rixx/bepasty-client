@@ -4,6 +4,7 @@ import json
 from urllib.parse import urljoin
 
 import click
+import magic
 
 from helpers import handle_request
 
@@ -18,10 +19,19 @@ def main():
 @click.option('--password', '-p', help='Your access token', required=True)
 @click.option('--url', '-u', help='The server\'s base URL', required=True)
 @click.option('--name', '-n', help='The paste\'s name')
-@click.option('--type', '-t', help='The paste\' content type')
+@click.option('--type', '-t', '_type', help='The paste\' content type')
 @click.option('--insecure', '-i', help='No certificate checks', is_flag=True)
 def upload(path, password, url, name, _type, insecure):
-    pass
+    chunk_size = 1024 * 1024
+    stream = path or click.get_binary_stream('stdin')
+
+    if path and not name:
+        name = path.name
+
+    first_chunk = stream.read(chunk_size)
+    if not _type:
+        _type = magic.Magic(mime=True).from_buffer(first_chunk) or 'text/plain'
+        click.echo(f'Uploading with filetype {_type}.')
 
 
 @main.command()
