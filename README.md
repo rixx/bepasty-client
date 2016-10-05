@@ -12,8 +12,8 @@ the time of this writing) Python 3.6.
 ## Status
 
  - [x] pastebin listing
- - [ ] file upload
- - [ ] stdin upload
+ - [x] file upload
+ - [x] stdin upload
  - [ ] file download
  - [ ] copy url to clipboard after upload
  - [ ] file deletion (once exposed in bepasty)
