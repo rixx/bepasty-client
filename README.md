@@ -19,3 +19,5 @@ the time of this writing) Python 3.6.
  - [ ] file deletion (once exposed in bepasty)
  - [ ] interactive shell
  - [ ] tests
+ - [ ] Progress bar/line
+ - [ ] documentation
