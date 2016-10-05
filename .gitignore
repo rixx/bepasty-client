@@ -1,0 +1,12 @@
+*.py[cod]
+*.swp
+*.aux
+*.log
+*.toc
+*.mo
+*~
+__pycache__/
+.cache
+build/
+dist/
+*.egg-info/
