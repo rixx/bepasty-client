@@ -54,7 +54,12 @@ def list(password, url, insecure):
 
     for key, paste in json.loads(response.content).items():
         meta = paste['file-meta']
-        name = meta['filename']
+        name = meta.get('filename', '')
+        if not name:
+            click.echo(f'{key} is broken (empty metadata)', nl=False, err=True)
+            click.echo(' - Please delete this file server-side!', err=True)
+            continue
+
         name = name[:18] + '…' if len(name) > 19 else name
         created = datetime.fromtimestamp(meta['timestamp-upload']).isoformat()
 
