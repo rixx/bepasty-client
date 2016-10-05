@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 import click
 
+from helpers import handle_request
+
 
 @click.group()
 def main():
@@ -23,6 +25,12 @@ def upload(path, password, url, name, _type, insecure):
 @click.option('--url', '-u', help='The server\'s base URL', required=True)
 @click.option('--insecure', '-i', help='Disable certificate checks', is_flag=True)
 def list(password, url, insecure):
+    response = handle_request(
+        method='get',
+        url=f'{url}/apis/rest/items',
+        auth=('user', password),
+        verify=not insecure,
+    )
     click.echo('Name'.ljust(20) + '│ ', nl=False)
     click.echo('Type'.ljust(19) + '│', nl=False)
     click.echo('Size'.rjust(10) + ' │ ', nl=False)
