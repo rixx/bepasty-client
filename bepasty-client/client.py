@@ -93,9 +93,9 @@ def list(password, url, insecure):
 
     for key, paste in json.loads(response.content).items():
         meta = paste['file-meta']
-        name = meta.get('filename', '')
+        name = meta.get('filename')
         if not name:
-            click.echo(f'{key} is broken (empty metadata)', nl=False, err=True)
+            click.echo(f'File {key} is broken (empty metadata)', nl=False, err=True)
             click.echo(' - Please delete this file server-side!', err=True)
             continue
 
